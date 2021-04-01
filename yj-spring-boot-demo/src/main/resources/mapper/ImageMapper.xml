@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.yuanjin.springBootDemo.dao.ImageDao">
+
+    <resultMap id="resultMap" type="fun.yuanjin.springBootDemo.domain.Image">
+        <result column="id" property="id"/>
+        <result column="poi_id" property="poiId"/>
+        <result column="type_id" property="typeId"/>
+        <result column="object_id" property="objectId"/>
+        <result column="img_desc" property="imgDesc"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_front" property="isFront"/>
+        <result column="sort_num" property="sortNum"/>
+        <result column="url" property="url"/>
+        <result column="img_size" property="imgSize"/>
+        <result column="img_remark" property="imgRemark"/>
+        <result column="create_id" property="createId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_id" property="modifyId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="app_key" property="appKey"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id,
+		poi_id,
+		type_id,
+		object_id,
+		img_desc,
+		is_show,
+		is_front,
+		sort_num,
+		url,
+		img_size,
+		img_remark,
+		create_id,
+		create_time,
+		modify_id,
+		modify_time,
+		app_key
+	</sql>
+
+    <select id="selectList" resultMap="resultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM poi_images
+    </select>
+
+    <select id="selectOne" resultMap="resultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM poi_images where id = 0;
+    </select>
+
+    <delete id="deleteById" parameterType="java.util.HashMap">
+		DELETE
+		FROM poi_images
+		WHERE id = #{id}
+	</delete>
+
+
+    <insert id="save" parameterType="fun.yuanjin.springBootDemo.domain.Image" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO poi_images (
+        <include refid="Base_Column_List"/>
+        ) VALUES (
+        #{id},
+        #{poiId},
+        #{typeId},
+        #{objectId},
+        #{imgDesc},
+        #{isShow},
+        #{isFront},
+        #{sortNum},
+        #{url},
+        #{imgSize},
+        #{imgRemark},
+        #{createId},
+        #{createTime},
+        #{modifyId},
+        #{modifyTime},
+        #{appKey}
+        );
+    </insert>
+</mapper>

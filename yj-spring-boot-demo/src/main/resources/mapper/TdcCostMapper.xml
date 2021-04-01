@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.yuanjin.springBootDemo.dao.TdcCostDao">
+
+    <resultMap id="resultMap" type="fun.yuanjin.springBootDemo.domain.TdcCost">
+        <result column="id" property="id"/>
+        <result column="product_name" property="productName"/>
+        <result column="price_item" property="priceItem"/>
+        <result column="price_child_item" property="priceChildItem"/>
+        <result column="count" property="count"/>
+        <result column="unit" property="unit"/>
+        <result column="per" property="per"/>
+        <result column="per_unit" property="perUnit"/>
+        <result column="cost" property="cost"/>
+        <result column="mouth_rat" property="mouthRat"/>
+        <result column="category" property="category"/>
+        <result column="app_key" property="appKey"/>
+        <result column="app_key_price_change" property="appKeyPriceChange"/>
+        <result column="app_name" property="appName"/>
+        <result column="user_name" property="userName"/>
+        <result column="group_name" property="groupName"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="env_name" property="envName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id,
+		product_name,
+		price_item,
+		price_child_item,
+		count,
+		unit,
+		per,
+		per_unit,
+		cost,
+		mouth_rat,
+		category,
+		app_key,
+		app_key_price_change,
+		app_name,
+		user_name,
+		group_name,
+		start_time,
+		end_time,
+		env_name
+	</sql>
+
+    <select id="selectList" resultMap="resultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tdc_cost
+    </select>
+
+    <select id="selectOne" resultMap="resultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tdc_cost where id = 0;
+    </select>
+
+    <delete id="deleteAll">
+		DELETE
+		FROM tdc_cost
+	</delete>
+
+
+    <insert id="save" parameterType="fun.yuanjin.springBootDemo.domain.TdcCost" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tdc_cost (
+        <include refid="Base_Column_List"/>
+        ) VALUES (
+        #{id},
+        #{productName},
+        #{priceItem},
+        #{priceChildItem},
+        #{count},
+        #{unit},
+        #{per},
+        #{perUnit},
+        #{cost},
+        #{mouthRat},
+        #{category},
+        #{appKey},
+        #{appKeyPriceChange},
+        #{appName},
+        #{userName},
+        #{groupName},
+        #{startTime},
+        #{endTime},
+        #{envName}
+        );
+    </insert>
+</mapper>
